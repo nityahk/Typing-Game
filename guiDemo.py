@@ -28,10 +28,12 @@ display_clock = 0
 
 ## Fonts
 splash_font = pygame.font.Font("guiAssets/Ubuntu-Bold.ttf", 60)
+button_font = pygame.font.Font("guiAssets/Ubuntu-Regular.ttf", 60)
 
 ## Colors
 COL_BLACK = (0, 0, 0)
 COL_RED = (255, 0, 0)
+COL_GREEN = (0, 255, 0)
 
 # Helper Functions
 def updateScreen():
@@ -43,7 +45,22 @@ def displayText(xpos, ypos, font, color, printedtext):
     textW = first_text.get_width()
     screen.blit(first_text, [xpos - textW/2, ypos])
 
-# Main
+def displayButton(xpos, ypos, displayedText, color):
+    
+    # Draws the button
+    pygame.draw.rect(screen, color, (xpos, ypos, 500, 100))
+
+    button_text = button_font.render(displayedText, 1, COL_BLACK)
+    screen.blit(button_text, [xpos+200, ypos+10])
+
+def checkClick(xpos, ypos):
+    mousePos = pygame.mouse.get_pos()
+    mouseClick = pygame.mouse.get_pressed()
+
+    return xpos <= mousePos[0] <= xpos+500 and ypos <= mousePos[1] <= ypos+100 and mouseClick[0] == 1
+        
+
+# MAIN 
 while runProgram:
     # Handling Logic for game state events
     for event in pygame.event.get():
@@ -52,12 +69,13 @@ while runProgram:
     
     # Logic for game states
     if gameState == SPLASH: # Logic for the title screen
-        # Perfoming Logic
-        
-        
-        # Drawing To Screen 
+ 
         pygame.Surface.fill(screen, COL_BLACK)
         displayText(SIZE[0]/2, 200, splash_font, COL_RED, "Untitled Typing Game")
+        displayButton(SIZE[0]/2 - 250, 400, "EASY", COL_GREEN)
+
+        if (checkClick(SIZE[0]/2 - 250, 400)):
+            print("Clicking the button\n")
 
     elif gameState == DIFF_SELECT: # Logic for the difficulty select screen
         pass
