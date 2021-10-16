@@ -1,8 +1,10 @@
 import pygame
+
 pygame.init()
 
 # Program Variables
 runProgram = True # will keep the program running as long 
+difficulty = 0
 
 ## Game States
 SPLASH = 0
@@ -53,12 +55,13 @@ def displayButton(xpos, ypos, displayedText, color):
     button_text = button_font.render(displayedText, 1, COL_BLACK)
     screen.blit(button_text, [xpos+200, ypos+10])
 
+# Game Functions
+
 def checkClick(xpos, ypos):
     mousePos = pygame.mouse.get_pos()
     mouseClick = pygame.mouse.get_pressed()
 
     return xpos <= mousePos[0] <= xpos+500 and ypos <= mousePos[1] <= ypos+100 and mouseClick[0] == 1
-        
 
 # MAIN 
 while runProgram:
@@ -78,6 +81,8 @@ while runProgram:
 
         if (checkClick(SIZE[0]/2 - 250, 300)):
             gameState = IN_GAME
+            difficulty = 0
+            print("You pressed the easy button")
 
         ## Medium Button
 
@@ -85,6 +90,8 @@ while runProgram:
 
         if (checkClick(SIZE[0]/2 - 250, 425)):
             gameState = IN_GAME
+            difficulty = 1
+            print("You pressed the medium button")
         
         ## Hard Button
 
@@ -92,6 +99,9 @@ while runProgram:
 
         if (checkClick(SIZE[0]/2 - 250, 550)):
             gameState = IN_GAME
+            difficulty = 2
+            print("You pressed the hard button")
+
     elif gameState == IN_GAME: # Logic for in-game
         pass
 
@@ -99,5 +109,3 @@ while runProgram:
     updateScreen()
 
 pygame.quit()
-
-

@@ -18,8 +18,6 @@ for line in file1.readlines():
         difficult.append(line.split("\t")[0])
 file1.close()
 
-
-
 time = True
 totalWords = 0
 
@@ -60,7 +58,6 @@ def runGame(choice):
         if(word == gameList[randNum] and time):
             totalWords += 1
 
-
 runGame(0)
 
 def displayResults():
@@ -80,6 +77,5 @@ def displayResults():
     else:
         print("Bonehead!")
 displayResults()
-
 
 exit()
