@@ -132,13 +132,13 @@ def runMainGame():
             medium.append(line.split("\t")[0])
         if(line.split("\t")[1].strip() == "Hard"):
             difficult.append(line.split("\t")[0])
-    file1.close()
+        file1.close()
 
     #defines the timer objects that will execute the displayResults once something happens
     timer = threading.Timer(10.0, timerFunction)
     timer.start()
     
-    runGame(difficult)
+    runGame(0)
     displayResults()
 
     exit()
