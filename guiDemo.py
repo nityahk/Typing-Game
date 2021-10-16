@@ -27,15 +27,21 @@ display_clock = 0
 # Asset Variables
 
 ## Fonts
+splash_font = pygame.font.Font("guiAssets/Ubuntu-Bold.ttf", 60)
 
 ## Colors
 COL_BLACK = (0, 0, 0)
+COL_RED = (255, 0, 0)
 
 # Helper Functions
 def updateScreen():
     pygame.display.flip()
     clock.tick(refresh_rate)
 
+def displayText(xpos, ypos, font, color, printedtext):
+    first_text = font.render(printedtext, 1, color)
+    textW = first_text.get_width()
+    screen.blit(first_text, [xpos - textW/2, ypos])
 
 # Main
 while runProgram:
@@ -47,9 +53,11 @@ while runProgram:
     # Logic for game states
     if gameState == SPLASH: # Logic for the title screen
         # Perfoming Logic
-        pass
+        
+        
         # Drawing To Screen 
         pygame.Surface.fill(screen, COL_BLACK)
+        displayText(SIZE[0]/2, 200, splash_font, COL_RED, "Untitled Typing Game")
 
     elif gameState == DIFF_SELECT: # Logic for the difficulty select screen
         pass
