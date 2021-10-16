@@ -14,9 +14,11 @@ for line in file1.readlines():
         easy.append(line.split("\t")[0])
     if(line.split("\t")[1].strip() == "Medium"):
         medium.append(line.split("\t")[0])
-    if(line.split("\t")[1].strip() == "Hard"):
+    if(line.split("\t")[1].strip() == "Difficult"):
         difficult.append(line.split("\t")[0])
 file1.close()
+
+
 
 time = True
 totalWords = 0
@@ -29,7 +31,7 @@ def timerFunction():
     time = False
 
 #defines the timer objects that will execute the displayResults once something happens
-timer = threading.Timer(10.0, timerFunction)
+timer = threading.Timer(60.0, timerFunction)
 timer.start()
 
 #All game related info is below
@@ -57,9 +59,20 @@ def runGame(choice):
         global totalWords
         if(word == gameList[randNum] and time):
             totalWords += 1
+#asks the user what difficulty the thing is going to be /
+userDifficulty = input("Please enter your difficulty: \n0) Easy \n1) Medium \n2) Hard\n")
+'''
+while(not(userDifficulty.isnumeric())):
+    userDifficulty = input("Please enter a number: ")
+while(not(int(userDifficulty) == 0 or int(userDifficulty) == 1 or int(userDifficulty) == 2)):
+    userDifficulty = input("Please enter a valid difficulty: ")
+    if(not(userDifficulty.isnumeric())):
+        print("Please enter a number")
+    print(userDifficulty)
+'''
+runGame(int(userDifficulty))
 
-runGame(0)
-
+#end of new stuff
 def displayResults():
     print("Your Words Per minute for this test is: " + str(totalWords))
     if(totalWords == 66):
@@ -77,5 +90,6 @@ def displayResults():
     else:
         print("Bonehead!")
 displayResults()
+
 
 exit()
