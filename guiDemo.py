@@ -6,9 +6,8 @@ runProgram = True # will keep the program running as long
 
 ## Game States
 SPLASH = 0
-DIFF_SELECT = 1
-HELP = 2
-IN_GAME = 3
+HELP = 1
+IN_GAME = 2
 
 gameState = SPLASH
 
@@ -34,6 +33,7 @@ button_font = pygame.font.Font("guiAssets/Ubuntu-Regular.ttf", 60)
 COL_BLACK = (0, 0, 0)
 COL_RED = (255, 0, 0)
 COL_GREEN = (0, 255, 0)
+COL_ORANGE = (255, 162, 0)
 
 # Helper Functions
 def updateScreen():
@@ -72,15 +72,26 @@ while runProgram:
  
         pygame.Surface.fill(screen, COL_BLACK)
         displayText(SIZE[0]/2, 200, splash_font, COL_RED, "Untitled Typing Game")
-        displayButton(SIZE[0]/2 - 250, 400, "EASY", COL_GREEN)
+        
+        ## Easy Button
+        displayButton(SIZE[0]/2 - 250, 300, "EASY", COL_GREEN)
 
-        if (checkClick(SIZE[0]/2 - 250, 400)):
-            print("Clicking the button\n")
+        if (checkClick(SIZE[0]/2 - 250, 300)):
+            gameState = IN_GAME
 
-    elif gameState == DIFF_SELECT: # Logic for the difficulty select screen
-        pass
-    elif gameState == HELP: # Logic for the help screen
-        pass
+        ## Medium Button
+
+        displayButton(SIZE[0]/2 - 250, 425, "MEDIUM", COL_ORANGE)
+
+        if (checkClick(SIZE[0]/2 - 250, 425)):
+            gameState = IN_GAME
+        
+        ## Hard Button
+
+        displayButton(SIZE[0]/2 - 250, 550, "HARD", COL_RED)
+
+        if (checkClick(SIZE[0]/2 - 250, 550)):
+            gameState = IN_GAME
     elif gameState == IN_GAME: # Logic for in-game
         pass
 
